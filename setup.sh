@@ -13,6 +13,9 @@ echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 		echo "mariadb-server-$MARIADB_MAJOR" mysql-server/root_password_again password 'unused'; \
 	} | debconf-set-selections 
 
+# Use the mirror hosted within SUNET in Sweden
+/bin/sed -i s/deb.debian.org/ftp.se.debian.org/g /etc/apt/sources.list
+
 # Update the image and install the needed tools
 apt-get update && \
     apt-get -y dist-upgrade && \
